@@ -1,0 +1,8 @@
+*.gem
+.bundle
+.ruby-version
+pkg/*
+doc/*
+tmp/*
+spec/internal/log/*.pid
+spec/internal/tmp/*

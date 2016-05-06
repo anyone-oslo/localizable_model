@@ -1,0 +1,16 @@
+# inherit_from:
+#   - .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - 'spec/internal/db/schema.rb'
+  TargetRubyVersion: 2.1
+
+Rails:
+  Enabled: true
+
+StringLiterals:
+  EnforcedStyle: double_quotes
+
+Documentation:
+  Enabled: false
