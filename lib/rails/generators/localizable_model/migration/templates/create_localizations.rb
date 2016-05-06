@@ -6,6 +6,9 @@ class CreateLocalizations < ActiveRecord::Migration
       t.string :locale
       t.text :value, limit: 16_777_215
       t.timestamps null: false
+      t.index([:localizable_id, :localizable_type, :name, :locale],
+              name: "index_localizations_on_locale")
+      t.index [:localizable_id, :localizable_type]
     end
   end
 end

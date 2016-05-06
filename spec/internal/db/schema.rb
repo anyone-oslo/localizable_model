@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 20160506141709) do
     t.datetime "updated_at",                        null: false
   end
 
+  add_index "localizations", ["localizable_id", "localizable_type", "name", "locale"], name: "index_localizations_on_locale", using: :btree
+  add_index "localizations", ["localizable_id", "localizable_type"], name: "index_localizations_on_localizable_id_and_localizable_type", using: :btree
+
   create_table "pages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
