@@ -10,11 +10,20 @@ module LocalizableModel
 
     def localize(locale)
       @locale = locale
+      localize_records if loaded?
       self
     end
 
-    def to_a
-      super.map { |record| record.localize(@locale) }
+    def load
+      super
+      localize_records
+      self
+    end
+
+    protected
+
+    def localize_records
+      @records.each { |r| r.localize!(@locale) }
     end
   end
 end
