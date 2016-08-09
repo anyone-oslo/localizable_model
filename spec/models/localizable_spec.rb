@@ -22,6 +22,21 @@ describe "Localizable", type: :model do
     it { is_expected.to match(%w(en nb)) }
   end
 
+  describe "#localized_attributes" do
+    let(:page) do
+      Page.create(body: { "en" => "My test page", "nb" => "Testside" })
+    end
+    let(:attributes) do
+      {
+        "body" => { "en" => "My test page", "nb" => "Testside" },
+        "name" => { "en" => nil, "nb" => nil }
+      }
+    end
+    subject { page.localized_attributes }
+
+    it { is_expected.to match(attributes) }
+  end
+
   describe "setting multiple locales" do
     let(:page) do
       Page.create(

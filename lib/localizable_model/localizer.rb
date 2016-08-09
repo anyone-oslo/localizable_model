@@ -20,6 +20,13 @@ module LocalizableModel
       locale ? true : false
     end
 
+    def localized_attributes
+      attribute_names.each_with_object({}) do |attr, h|
+        h[attr] = {}
+        locales.each { |l| h[attr][l] = get_value(attr, l) }
+      end
+    end
+
     def get(attribute, options = {})
       get_options = { locale: locale }.merge(options)
 
@@ -54,10 +61,19 @@ module LocalizableModel
 
     private
 
+    def attribute_names
+      @configuration.attributes.keys.map(&:to_s)
+    end
+
     def find_localizations(name, locale)
       @model.localizations.select do |l|
         l.name == name && l.locale == locale
       end
+    end
+
+    def get_value(attribute, locale)
+      localization = find_localizations(attribute, locale).try(&:first)
+      localization.value if localization
     end
 
     def require_locale!(attribute, locale)

@@ -60,6 +60,12 @@ module LocalizableModel
       self
     end
 
+    # Returns a list of all the localized attributes
+    #
+    #  page.localized_attributes # => { "name" => { "en" => "Hello" } }
+    #
+    delegate :localized_attributes, to: :localizer
+
     # assign_attributes from ActiveRecord is overridden to catch locale before
     # any other attributes are written. This enables the following construct:
     #
