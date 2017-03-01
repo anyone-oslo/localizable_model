@@ -42,7 +42,7 @@ module LocalizableModel
 
     def set(attribute, value, options = {})
       set_options = { locale: locale }.merge(options)
-      if value.is_a?(Hash)
+      if value.is_a?(Hash) || value.is_a?(ActionController::Parameters)
         value.each { |loc, val| set(attribute, val, locale: loc) }
       else
         require_locale!(attribute, set_options[:locale])

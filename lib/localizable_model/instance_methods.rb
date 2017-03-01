@@ -72,7 +72,7 @@ module LocalizableModel
     #  Page.create(name: 'My Page', locale: 'en')
     #
     def assign_attributes(new_attributes)
-      if new_attributes.is_a?(Hash)
+      if new_attributes.respond_to?(:[])
         attributes = new_attributes.stringify_keys
         self.locale = attributes["language"] if attributes.key?("language")
         self.locale = attributes["locale"]   if attributes.key?("locale")
