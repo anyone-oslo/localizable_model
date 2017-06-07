@@ -1,24 +1,20 @@
-addons:
-  code_climate:
-    repo_token: 24fff5bcb3f0f6c8150f809fed97b8dad2b37be25d0bab21cd14a73669199cfd
 language: ruby
 sudo: false
 cache: bundler
 services:
-- mysql
+  - mysql
 rvm:
-- 2.2.3
-- 2.3.0
+  - 2.2.7
+  - 2.3.4
+  - 2.4.1
 env:
-- CI=1 DB=mysql
-- CI=1 DB=postgres
-matrix:
-  exclude:
-    - rvm: 2.2.3
-      env: CI=1 DB=postgres
+  - CI=1 DB=mysql
+  - CI=1 DB=postgres
 script:
-- bundle exec rspec spec
+  - bundle exec rspec spec
 before_script:
-- sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database localizable_model_test;'; fi"
-- sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'create database localizable_model_test' -U postgres; fi"
-- bundle exec rake db:migrate
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database localizable_model_test;'; fi"
+  - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'create database localizable_model_test' -U postgres; fi"
+  - bundle exec rake db:migrate
+after_script:
+  - CODECLIMATE_REPO_TOKEN=24fff5bcb3f0f6c8150f809fed97b8dad2b37be25d0bab21cd14a73669199cfd bundle exec codeclimate-test-reporter
