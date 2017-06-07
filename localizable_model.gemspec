@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "mysql2", "~> 0.4.2"
   s.add_development_dependency "pg", "~> 0.18.3"
   s.add_development_dependency "rspec-rails", "~> 3.5.1"
-  s.add_development_dependency "factory_girl", "~> 4.5.0"
+  s.add_development_dependency "factory_girl", "~> 4.8.0"
   s.add_development_dependency "shoulda-matchers", "~> 3.1.0"
 
   s.add_dependency 'rails', '~> 5.0'

@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Localization < ActiveRecord::Base
-  belongs_to :localizable, polymorphic: true
+  belongs_to :localizable, polymorphic: true, optional: true
 
   class << self
     def locales

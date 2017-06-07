@@ -29,7 +29,6 @@ module LocalizableModel
 
     def get(attribute, options = {})
       get_options = { locale: locale }.merge(options)
-
       find_localizations(
         attribute.to_s,
         get_options[:locale].to_s
