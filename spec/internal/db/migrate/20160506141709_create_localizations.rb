@@ -1,4 +1,4 @@
-class CreateLocalizations < ActiveRecord::Migration
+class CreateLocalizations < ActiveRecord::Migration[4.2]
   def change
     create_table :localizations do |t|
       t.references :localizable, polymorphic: true
