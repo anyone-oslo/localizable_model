@@ -77,6 +77,15 @@ Multiple locales can be updated at the same time:
 page.name = { en: "Hello", fr: "Bonjour" }
 ```
 
+By chaining through `.any_locale`, you can get results from other locales if
+a localization is missing.
+
+``` ruby
+page = Page.create(locale: "fr", name: "Bonjour").localize("en")
+page.any_locale.name? # => true
+page.any_locale.name  # => "Bonjour"
+```
+
 ## License
 
 LocalizableModel is licensed under the

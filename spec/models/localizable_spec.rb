@@ -22,6 +22,48 @@ describe "Localizable", type: :model do
     it { is_expected.to match(%w(en nb)) }
   end
 
+  describe "#any_locale" do
+    subject { page.any_locale.body }
+
+    context "when attribute exists in current language" do
+      let(:page) do
+        Page.create(body: { "en" => "My test page", "nb" => "Testside" },
+                    locale: "en")
+      end
+
+      it { is_expected.to eq("My test page") }
+
+      it "should respond to .body?" do
+        expect(page.any_locale.body?).to eq(true)
+      end
+    end
+
+    context "when attribute exists in other language" do
+      let(:page) do
+        Page.create(body: { "nb" => "Testside" },
+                    locale: "en")
+      end
+
+      it { is_expected.to eq("Testside") }
+
+      it "should respond to .body?" do
+        expect(page.any_locale.body?).to eq(true)
+      end
+    end
+
+    context "when attribute doesn't exist" do
+      let(:page) do
+        Page.create(locale: "en")
+      end
+
+      it { is_expected.to eq("") }
+
+      it "should respond to .body?" do
+        expect(page.any_locale.body?).to eq(false)
+      end
+    end
+  end
+
   describe "#localized_attributes" do
     let(:page) do
       Page.create(body: { "en" => "My test page", "nb" => "Testside" })

@@ -17,6 +17,12 @@ module LocalizableModel
     #
     delegate :locale, to: :localizer
 
+    # Returns an AnyLocalizer for the model.
+    #
+    def any_locale
+      AnyLocalizer.new(self)
+    end
+
     # Setter for locale
     #
     #  page.locale = 'no' # => 'no'

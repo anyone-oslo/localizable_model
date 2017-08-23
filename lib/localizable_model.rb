@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 load "localizable_model/active_record_extension.rb"
+load "localizable_model/any_localizer.rb"
 load "localizable_model/class_methods.rb"
 load "localizable_model/configuration.rb"
 load "localizable_model/engine.rb"
