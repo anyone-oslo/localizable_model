@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.name        = "localizable_model"
   s.version     = LocalizableModel::VERSION
   s.authors     = ["Inge Jørgensen"]
-  s.email       = ["inge@kord.no"]
+  s.email       = ["inge@anyone.no"]
   s.homepage    = ""
   s.summary     = "Localization support for ActiveRecord objects"
   s.description = "LocalizableModel provides localization support for " \
