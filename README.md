@@ -2,7 +2,7 @@
 
 LocalizableModel allows any ActiveRecord model to have localized attributes.
 
-[![Build Status](https://travis-ci.org/kord-as/localizable_model.svg?branch=master)](https://travis-ci.org/kord-as/localizable_model) [![Code Climate](https://codeclimate.com/github/kord-as/localizable_model/badges/gpa.svg)](https://codeclimate.com/github/kord-as/localizable_model) [![Test Coverage](https://codeclimate.com/github/kord-as/localizable_model/badges/coverage.svg)](https://codeclimate.com/github/kord-as/localizable_model) [![Dependency Status](https://gemnasium.com/kord-as/localizable_model.svg)](https://gemnasium.com/kord-as/localizable_model)
+[![Build Status](https://travis-ci.org/anyone-oslo/localizable_model.svg?branch=master)](https://travis-ci.org/anyone-oslo/localizable_model) [![Code Climate](https://codeclimate.com/github/anyone-oslo/localizable_model/badges/gpa.svg)](https://codeclimate.com/github/anyone-oslo/localizable_model) [![Test Coverage](https://codeclimate.com/github/anyone-oslo/localizable_model/badges/coverage.svg)](https://codeclimate.com/github/anyone-oslo/localizable_model) [![Dependency Status](https://gemnasium.com/anyone-oslo/localizable_model.svg)](https://gemnasium.com/anyone-oslo/localizable_model)
 
 ## Installation
 
