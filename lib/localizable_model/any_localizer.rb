@@ -25,7 +25,7 @@ module LocalizableModel
 
     def locales
       (
-        [record.locale, I18n.locale] + I18n.available_locales + record.locales
+        [record.locale, I18n.locale] + record.locales
       ).compact.map(&:to_sym).uniq
     end
 

@@ -20,7 +20,7 @@ module LocalizableModel
     # Returns an AnyLocalizer for the model.
     #
     def any_locale
-      AnyLocalizer.new(self)
+      @any_localizer ||= AnyLocalizer.new(self)
     end
 
     # Setter for locale
