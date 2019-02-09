@@ -36,6 +36,20 @@ module LocalizableModel
 
     private
 
+    def define_localizable_methods!
+      localizable_configuration.attributes.keys.each do |name|
+        define_method name do
+          localizer.get(name).to_s
+        end
+        define_method "#{name}?" do
+          localizer.value_for?(name)
+        end
+        define_method "#{name}=" do |value|
+          localizer.set(name, value)
+        end
+      end
+    end
+
     def inherited_localizable_configuration
       if superclass.respond_to?(:localizable_configuration)
         LocalizableModel::Configuration.new(

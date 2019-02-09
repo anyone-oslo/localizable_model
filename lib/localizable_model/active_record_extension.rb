@@ -30,6 +30,7 @@ module LocalizableModel
         before_save :cleanup_localizations!
       end
       localizable_configuration.instance_eval(&block) if block_given?
+      define_localizable_methods!
     end
   end
 end
