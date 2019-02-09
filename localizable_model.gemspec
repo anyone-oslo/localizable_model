@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
     "README.md"
   ]
 
-  s.add_development_dependency "mysql2", "~> 0.4.2"
+  s.add_development_dependency "mysql2"
   s.add_development_dependency "pg", "~> 0.18.3"
   s.add_development_dependency "rspec-rails", "~> 3.5.1"
   s.add_development_dependency "factory_girl", "~> 4.8.0"
