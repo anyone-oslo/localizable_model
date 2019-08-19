@@ -4,8 +4,8 @@ cache: bundler
 services:
   - mysql
 rvm:
-  - 2.4.1
-  - 2.5.1
+  - 2.5.5
+  - 2.6.3
 env:
   - CI=1 DB=mysql
   - CI=1 DB=postgres
