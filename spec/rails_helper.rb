@@ -13,7 +13,7 @@ end
 
 require "rails_helper"
 require "rspec/rails"
-require "factory_girl"
+require "factory_bot"
 require "shoulda-matchers"
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -53,8 +53,8 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # Use FactoryGirl shorthand
-  config.include FactoryGirl::Syntax::Methods
+  # Use FactoryBot shorthand
+  config.include FactoryBot::Syntax::Methods
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -81,4 +81,4 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-FactoryGirl.find_definitions
+FactoryBot.find_definitions

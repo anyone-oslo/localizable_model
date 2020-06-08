@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :localization do
     name { "name" }
     locale { "nb" }
