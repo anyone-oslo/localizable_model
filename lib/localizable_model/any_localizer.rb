@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module LocalizableModel
   class AnyLocalizer
@@ -35,10 +35,10 @@ module LocalizableModel
 
     def localized(attribute)
       localized = locales.inject(nil) do |str, l|
-        str ||= -> {
+        str || lambda {
           value = record.localize(l).send(attribute)
           value.blank? ? nil : value
-        }.call()
+        }.call
       end
       localized || ""
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails/generators/active_record/migration"
 
 module LocalizableModel
@@ -6,7 +8,7 @@ module LocalizableModel
       include ActiveRecord::Generators::Migration
 
       desc "Creates the LocalizableModel migration"
-      source_root File.expand_path("../templates", __FILE__)
+      source_root File.expand_path("templates", __dir__)
 
       def copy_files
         migration_template(

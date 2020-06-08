@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module LocalizableModel
   # = LocalizableModel::ClassMethods
@@ -37,16 +37,10 @@ module LocalizableModel
     private
 
     def define_localizable_methods!
-      localizable_configuration.attributes.keys.each do |name|
-        define_method name do
-          localizer.get(name).to_s
-        end
-        define_method "#{name}?" do
-          localizer.value_for?(name)
-        end
-        define_method "#{name}=" do |value|
-          localizer.set(name, value)
-        end
+      localizable_configuration.attributes.each_key do |name|
+        define_method(name)       { localizer.get(name).to_s }
+        define_method("#{name}?") { localizer.value_for?(name) }
+        define_method("#{name}=") { |value| localizer.set(name, value) }
       end
     end
 

@@ -5,8 +5,8 @@ services:
   - mysql
   - postgresql
 rvm:
-  - 2.5.5
   - 2.6.3
+  - 2.7.1
 env:
   - CI=1 DB=mysql
   - CI=1 DB=postgres
@@ -16,5 +16,3 @@ before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database localizable_model_test;'; fi"
   - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'create database localizable_model_test' -U postgres; fi"
   - bundle exec rake db:migrate
-after_script:
-  - CODECLIMATE_REPO_TOKEN=5b2cbc93b7cf9ebdf3de94b3d98f82cd26d480503018203992d7eff3991c9b49 bundle exec codeclimate-test-reporter

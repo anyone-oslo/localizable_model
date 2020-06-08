@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module LocalizableModel
   # = LocalizableModel::ActiveRecordExtension
@@ -20,19 +20,23 @@ module LocalizableModel
     #  end
     #
     def localizable(&block)
-      unless is_a?(LocalizableModel::ClassMethods)
-        send :extend,  LocalizableModel::ClassMethods
-        send :include, LocalizableModel::InstanceMethods
-        has_many(:localizations,
-                 as: :localizable,
-                 dependent: :destroy,
-                 autosave: true)
-        before_save :cleanup_localizations!
-      end
+      extend_with_localizable_model!
       localizable_configuration.instance_eval(&block) if block_given?
       define_localizable_methods!
+    end
+
+    def extend_with_localizable_model!
+      return if is_a?(LocalizableModel::ClassMethods)
+
+      send :extend,  LocalizableModel::ClassMethods
+      send :include, LocalizableModel::InstanceMethods
+      has_many(:localizations,
+               as: :localizable,
+               dependent: :destroy,
+               autosave: true)
+      before_save :cleanup_localizations!
     end
   end
 end
 
-ActiveRecord::Base.send(:extend, LocalizableModel::ActiveRecordExtension)
+ActiveRecord::Base.extend LocalizableModel::ActiveRecordExtension

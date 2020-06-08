@@ -1,8 +1,9 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module LocalizableModel
   class Localizer
     attr_accessor :locale
+
     def initialize(model)
       @model         = model
       @configuration = model.class.localizable_configuration
@@ -72,11 +73,12 @@ module LocalizableModel
 
     def get_value(attribute, locale)
       localization = find_localizations(attribute, locale).try(&:first)
-      localization.value if localization
+      localization&.value
     end
 
     def require_locale!(attribute, locale)
       return if locale
+
       raise(ArgumentError,
             "Tried to set :#{attribute}, but no locale has been set")
     end

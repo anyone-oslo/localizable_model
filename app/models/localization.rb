@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 class Localization < ActiveRecord::Base
   belongs_to :localizable, polymorphic: true, optional: true, touch: true

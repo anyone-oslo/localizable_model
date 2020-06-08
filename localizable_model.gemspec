@@ -1,6 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-$LOAD_PATH.push File.expand_path("../lib", __FILE__)
+$LOAD_PATH.push File.expand_path("lib", __dir__)
 require "localizable_model/version"
 
 Gem::Specification.new do |s|
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = "LocalizableModel provides localization support for " \
                   "ActiveRecord objects"
 
-  s.required_ruby_version = ">= 1.9.2"
+  s.required_ruby_version = ">= 2.4.0"
 
   s.files = Dir[
     "{app,config,db,lib,vendor}/**/*",
@@ -21,11 +21,11 @@ Gem::Specification.new do |s|
     "README.md"
   ]
 
+  s.add_development_dependency "factory_bot"
   s.add_development_dependency "mysql2"
   s.add_development_dependency "pg", "~> 0.18.3"
   s.add_development_dependency "rspec-rails", "~> 3.5.1"
-  s.add_development_dependency "factory_bot"
   s.add_development_dependency "shoulda-matchers", "~> 3.1.0"
 
-  s.add_dependency 'rails', '> 5.0'
+  s.add_dependency "rails", "> 5.0"
 end

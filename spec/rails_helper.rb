@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require "simplecov"
 SimpleCov.start
 
 ENV["RAILS_ENV"] ||= "test"
 ENV["DB"] ||= "mysql"
 
-require File.expand_path("../internal/config/environment", __FILE__)
+require File.expand_path("internal/config/environment", __dir__)
 
 # Prevent database truncation if the environment is production
 if Rails.env.production?
@@ -31,7 +33,7 @@ require "shoulda-matchers"
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join("../support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("../support/**/*.rb")].sort.each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

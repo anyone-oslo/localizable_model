@@ -1,5 +1,5 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module LocalizableModel
-  VERSION = "0.6.4".freeze unless LocalizableModel.const_defined?("VERSION")
+  VERSION = "0.6.4" unless LocalizableModel.const_defined?("VERSION")
 end

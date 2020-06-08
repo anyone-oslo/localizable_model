@@ -1,6 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-require File.expand_path("../boot", __FILE__)
+require File.expand_path("boot", __dir__)
 
 # Pick the frameworks you want:
 require "active_record/railtie"
@@ -36,6 +36,6 @@ module Internal
     # ]
     config.i18n.default_locale = :en
 
-    config.i18n.available_locales = [:nb, :en]
+    config.i18n.available_locales = %i[nb en]
   end
 end

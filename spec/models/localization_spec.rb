@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require "rails_helper"
 
@@ -8,21 +8,25 @@ describe Localization, type: :model do
   it { is_expected.to belong_to(:localizable) }
 
   describe ".locales" do
+    subject { described_class.locales }
+
     before do
       create(:localization, locale: "en")
       create(:localization, locale: "nb")
     end
-    subject { Localization.locales }
-    it { is_expected.to match(%w(en nb)) }
+
+    it { is_expected.to match(%w[en nb]) }
   end
 
   describe ".names" do
+    subject { described_class.names }
+
     before do
       create(:localization, name: "title")
       create(:localization, name: "body")
     end
-    subject { Localization.names }
-    it { is_expected.to match(%w(body title)) }
+
+    it { is_expected.to match(%w[body title]) }
   end
 
   describe "#to_s" do
@@ -30,11 +34,13 @@ describe Localization, type: :model do
 
     context "when value is nil" do
       let(:localization) { create(:localization, value: nil) }
+
       it { is_expected.to eq("") }
     end
 
     context "when value is set" do
       let(:localization) { create(:localization, value: "Hello world") }
+
       it { is_expected.to eq("Hello world") }
     end
   end
@@ -44,16 +50,19 @@ describe Localization, type: :model do
 
     context "when value is empty" do
       let(:localization) { create(:localization, value: nil) }
+
       it { is_expected.to eq(true) }
     end
 
     context "when value is blank" do
       let(:localization) { create(:localization, value: "") }
+
       it { is_expected.to eq(true) }
     end
 
     context "when value is set" do
       let(:localization) { create(:localization, value: "Hello world") }
+
       it { is_expected.to eq(false) }
     end
   end
@@ -63,14 +72,16 @@ describe Localization, type: :model do
       create(:localization,
              locale: "fr",
              localizable: localization.localizable,
-             value: "Bonjour tout le monde"
-            )
+             value: "Bonjour tout le monde")
     end
+
     let(:fr_translation) { localization.translate("fr").to_s }
     let(:en_translation) { localization.translate("en").to_s }
+
     specify do
       expect(fr_translation).to eq("Bonjour tout le monde")
     end
+
     specify do
       expect(en_translation).not_to eq("Bonjour tout le monde")
     end

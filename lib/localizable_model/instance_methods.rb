@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module LocalizableModel
   # = LocalizableModel::InstanceMethods
@@ -19,9 +19,10 @@ module LocalizableModel
 
     # Returns an AnyLocalizer for the model.
     #
-    def any_locale
+    def any_localizer
       @any_localizer ||= AnyLocalizer.new(self)
     end
+    alias any_locale any_localizer
 
     # Setter for locale
     #
@@ -89,7 +90,7 @@ module LocalizableModel
     # A localized model responds to :foo, :foo= and :foo?
     #
     def respond_to?(method_name, *args)
-      requested_attribute, = method_name.to_s.match(/(.*?)([\?=]?)$/)[1..2]
+      requested_attribute, = method_name.to_s.match(/(.*?)([?=]?)$/)[1..2]
       localizer.attribute?(requested_attribute.to_sym) ? true : super
     end
 
@@ -113,9 +114,13 @@ module LocalizableModel
       localizer.cleanup_localizations!
     end
 
+    def respond_to_missing?(method_name, include_private = false)
+      localizer.attribute?(method_to_attr(method_name)) || super
+    end
+
     def method_missing(method_name, *args)
       attr = method_to_attr(method_name)
-      super unless localizer.attribute?(attr)
+      return super unless localizer.attribute?(attr)
 
       case method_name.to_s
       when /\?$/
@@ -128,7 +133,7 @@ module LocalizableModel
     end
 
     def method_to_attr(method_name)
-      method_name.to_s.match(/(.*?)([\?=]?)$/)[1].to_sym
+      method_name.to_s.match(/(.*?)([?=]?)$/)[1].to_sym
     end
   end
 end

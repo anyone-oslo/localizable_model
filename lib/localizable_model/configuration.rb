@@ -1,9 +1,9 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module LocalizableModel
   class Configuration
     def initialize(attributes = nil)
-      @attributes = attributes
+      @attribute_table = attributes
     end
 
     def attribute(attribute_name, options = {})
@@ -36,13 +36,14 @@ module LocalizableModel
 
     def hashify(list)
       return list if list.is_a?(Hash)
+
       list.each_with_object({}) do |e, a|
         a[e] = {}
       end
     end
 
     def attribute_table
-      @attributes ||= {}
+      @attribute_table ||= {}
     end
   end
 end

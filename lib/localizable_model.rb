@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 load "localizable_model/active_record_extension.rb"
 load "localizable_model/any_localizer.rb"
