@@ -53,7 +53,6 @@ jobs:
         ports:
           - 5432:5432
         env:
-          DB: postgres
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ env.POSTGRES_DB }}
@@ -93,6 +92,7 @@ jobs:
           yarn install
       - name: Create database
         env:
+          DB: postgres
           RAILS_ENV: test
           PGHOST: localhost
           PGUSER: ${{ env.POSTGRES_USER }}
@@ -101,6 +101,7 @@ jobs:
           bundle exec rake db:migrate
       - name: Run tests
         env:
+          DB: postgres
           PGHOST: localhost
           PGUSER: ${{ env.POSTGRES_USER }}
           PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
