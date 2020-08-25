@@ -43,9 +43,9 @@ Style/FormatStringToken:
   Exclude:
     - "config/routes.rb"
 
-Style/MethodMissingSuper:
+Style/OptionalBooleanParameter:
   Exclude:
-    - "lib/pages_core/templates/configuration_proxy.rb"
+    - "lib/localizable_model/instance_methods.rb"
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
