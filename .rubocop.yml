@@ -1,4 +1,6 @@
-require: rubocop-rspec
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 inherit_from:
   - .rubocop_todo.yml
@@ -59,3 +61,6 @@ Layout/MultilineOperationIndentation:
 
 Rails:
   Enabled: true
+
+Rails/ApplicationRecord:
+  Enabled: false

@@ -30,14 +30,14 @@ module LocalizableModel
     end
 
     def localized?(attribute)
-      !localized(attribute).blank?
+      localized(attribute).present?
     end
 
     def localized(attribute)
       localized = locales.inject(nil) do |str, l|
         str || lambda {
           value = record.localize(l).send(attribute)
-          value.blank? ? nil : value
+          value.presence
         }.call
       end
       localized || ""

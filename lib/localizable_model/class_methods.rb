@@ -21,7 +21,7 @@ module LocalizableModel
     #
     def localized(locale)
       in_locale(locale)
-        .where("localizations.locale = ?", locale)
+        .where(localizations: { locale: locale })
         .references(:localizations)
     end
 
