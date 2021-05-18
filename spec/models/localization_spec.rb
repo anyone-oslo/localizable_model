@@ -5,7 +5,7 @@ require "rails_helper"
 describe Localization, type: :model do
   let(:localization) { create(:localization) }
 
-  it { is_expected.to belong_to(:localizable) }
+  it { is_expected.to belong_to(:localizable).optional }
 
   describe ".locales" do
     subject { described_class.locales }

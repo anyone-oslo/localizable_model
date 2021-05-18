@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = "LocalizableModel provides localization support for " \
                   "ActiveRecord objects"
 
-  s.required_ruby_version = ">= 2.4.0"
+  s.required_ruby_version = ">= 2.7.0"
 
   s.files = Dir[
     "{app,config,db,lib,vendor}/**/*",
@@ -23,9 +23,9 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "factory_bot"
   s.add_development_dependency "mysql2"
-  s.add_development_dependency "pg", "~> 0.18.3"
-  s.add_development_dependency "rspec-rails", "~> 3.5.1"
-  s.add_development_dependency "shoulda-matchers", "~> 3.1.0"
+  s.add_development_dependency "pg"
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "shoulda-matchers"
 
   s.add_dependency "rails", "> 5.0"
 end
