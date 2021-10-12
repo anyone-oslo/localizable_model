@@ -9,7 +9,7 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - main
       - develop
   pull_request:
 jobs:
@@ -129,7 +129,7 @@ jobs:
 
   notify-slack:
     name: Slack notification
-    if: ${{ github.ref == 'refs/heads/master' && always() }}
+    if: ${{ github.ref == 'refs/heads/main' && always() }}
     needs:
       - rubocop-test
       # - eslint-test
