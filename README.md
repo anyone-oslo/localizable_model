@@ -1,5 +1,5 @@
 [![Version](https://img.shields.io/gem/v/localizable_model.svg?style=flat)](https://rubygems.org/gems/localizable_model)
-[![Build Status](https://travis-ci.org/anyone-oslo/localizable_model.svg?branch=master)](https://travis-ci.org/anyone-oslo/localizable_model)
+[![Build](https://github.com/anyone-oslo/localizable_model/actions/workflows/build.yml/badge.svg)](https://github.com/anyone-oslo/localizable_model/actions/workflows/build.yml)
 [![Code Climate](https://codeclimate.com/github/anyone-oslo/localizable_model/badges/gpa.svg)](https://codeclimate.com/github/anyone-oslo/localizable_model)
 [![Test Coverage](https://codeclimate.com/github/anyone-oslo/localizable_model/badges/coverage.svg)](https://codeclimate.com/github/anyone-oslo/localizable_model)
 [![Inline docs](http://inch-ci.org/github/anyone-oslo/localizable_model.svg)](http://inch-ci.org/github/anyone-oslo/localizable_model)
