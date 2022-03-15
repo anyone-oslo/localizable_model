@@ -51,19 +51,19 @@ describe Localization, type: :model do
     context "when value is empty" do
       let(:localization) { create(:localization, value: nil) }
 
-      it { is_expected.to eq(true) }
+      it { is_expected.to be(true) }
     end
 
     context "when value is blank" do
       let(:localization) { create(:localization, value: "") }
 
-      it { is_expected.to eq(true) }
+      it { is_expected.to be(true) }
     end
 
     context "when value is set" do
       let(:localization) { create(:localization, value: "Hello world") }
 
-      it { is_expected.to eq(false) }
+      it { is_expected.to be(false) }
     end
   end
 

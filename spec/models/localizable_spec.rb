@@ -38,7 +38,7 @@ describe "Localizable", type: :model do
       it { is_expected.to eq("My test page") }
 
       it "responds to .body?" do
-        expect(page.any_locale.body?).to eq(true)
+        expect(page.any_locale.body?).to be(true)
       end
     end
 
@@ -51,7 +51,7 @@ describe "Localizable", type: :model do
       it { is_expected.to eq("Testside") }
 
       it "responds to .body?" do
-        expect(page.any_locale.body?).to eq(true)
+        expect(page.any_locale.body?).to be(true)
       end
     end
 
@@ -63,7 +63,7 @@ describe "Localizable", type: :model do
       it { is_expected.to eq("") }
 
       it "responds to .body?" do
-        expect(page.any_locale.body?).to eq(false)
+        expect(page.any_locale.body?).to be(false)
       end
     end
   end
@@ -92,7 +92,7 @@ describe "Localizable", type: :model do
       )
     end
 
-    specify { expect(page.body?).to eq(true) }
+    specify { expect(page.body?).to be(true) }
     specify { expect(page.body.to_s).to eq("My test page") }
     specify { expect(page.localize("nb").body.to_s).to eq("Testside") }
     specify { expect(page.locales).to match(%w[en nb]) }
@@ -110,14 +110,14 @@ describe "Localizable", type: :model do
   describe "returns a blank Localization for uninitialized columns" do
     let(:page) { Page.new }
 
-    specify { expect(page.body?).to eq(false) }
+    specify { expect(page.body?).to be(false) }
     specify { expect(page.body).to be_a(String) }
   end
 
   describe "with a body" do
     let(:page) { Page.create(body: "My test page", locale: "en") }
 
-    specify { expect(page.body?).to eq(true) }
+    specify { expect(page.body?).to be(true) }
     specify { expect(page.body).to be_kind_of(String) }
     specify { expect(page.body.to_s).to eq("My test page") }
 
@@ -129,13 +129,13 @@ describe "Localizable", type: :model do
 
     it "responds with false when body is nil" do
       page.body = nil
-      expect(page.body?).to eq(false)
+      expect(page.body?).to be(false)
     end
 
     it "removes the localization when nilified" do
       page.update(body: nil)
       page.reload
-      expect(page.body?).to eq(false)
+      expect(page.body?).to be(false)
     end
   end
 end
