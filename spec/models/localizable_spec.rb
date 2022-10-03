@@ -118,7 +118,7 @@ describe "Localizable", type: :model do
     let(:page) { Page.create(body: "My test page", locale: "en") }
 
     specify { expect(page.body?).to be(true) }
-    specify { expect(page.body).to be_kind_of(String) }
+    specify { expect(page.body).to be_a(String) }
     specify { expect(page.body.to_s).to eq("My test page") }
 
     it "is changed when saved" do

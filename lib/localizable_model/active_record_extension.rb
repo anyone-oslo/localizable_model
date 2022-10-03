@@ -39,4 +39,6 @@ module LocalizableModel
   end
 end
 
-ActiveRecord::Base.extend LocalizableModel::ActiveRecordExtension
+ActiveSupport.on_load(:active_record) do
+  extend LocalizableModel::ActiveRecordExtension
+end
