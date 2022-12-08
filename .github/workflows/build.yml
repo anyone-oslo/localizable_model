@@ -3,7 +3,6 @@ env:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   POSTGRES_DB: localizable_model_test
-  CC_TEST_REPORTER_ID: 5b2cbc93b7cf9ebdf3de94b3d98f82cd26d480503018203992d7eff3991c9b49
 
 name: Build
 on:
@@ -16,50 +15,23 @@ jobs:
   rubocop-test:
     name: Rubocop
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-      - name: Ruby gem cache
-        uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Install Ruby gems
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install
+          bundler-cache: true
       - name: Check code
         run: bundle exec rubocop
-
-  # eslint-test:
-  #   name: ESLint
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v1
-  #     - name: Node modules cache
-  #       uses: actions/cache@v1
-  #       with:
-  #         path: node_modules
-  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-yarn-
-  #     - name: Install Node modules
-  #       run: |
-  #         yarn install
-  #     - name: Check code
-  #       run: yarn lint-javascript
 
   rspec-test:
     name: RSpec
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       matrix:
-        ruby: ['2.7', '3.0']
+        ruby: ['2.7', '3.0', '3.1']
     services:
       postgres:
         image: postgres:latest
@@ -76,25 +48,14 @@ jobs:
           --health-retries 5
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-ruby@v1
+      - name: Install system dependencies
+        run: sudo apt-get install -y libpq-dev libvips42
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-      - name: Install system dependencies
-        run: sudo apt-get install -y libpq-dev
-      - name: Ruby gem cache
-        uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Install Ruby gems
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install
+          bundler-cache: true
       - name: Node modules cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -105,7 +66,6 @@ jobs:
           yarn install
       - name: Create database
         env:
-          DB: postgres
           RAILS_ENV: test
           PGHOST: localhost
           PGUSER: ${{ env.POSTGRES_USER }}
@@ -114,25 +74,22 @@ jobs:
           bundle exec rake db:migrate
       - name: Run tests
         env:
-          DB: postgres
           PGHOST: localhost
           PGUSER: ${{ env.POSTGRES_USER }}
           PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
         run: bundle exec rspec
       - name: Send results to Code Climate
         uses: paambaati/codeclimate-action@v2.6.0
-        if: ${{ env.CC_TEST_REPORTER_ID }}
         env:
-          CC_TEST_REPORTER_ID: ${{ env.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: ls
 
   notify-slack:
     name: Slack notification
-    if: ${{ github.ref == 'refs/heads/main' && always() }}
+    if: "always() && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[ci skip]')"
     needs:
       - rubocop-test
-      # - eslint-test
       - rspec-test
     runs-on: ubuntu-latest
     steps:
