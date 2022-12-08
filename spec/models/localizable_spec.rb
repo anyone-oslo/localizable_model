@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe "Localizable", type: :model do
+describe "Localizable" do
   describe ".localized" do
     subject { Page.localized("nb") }
 
