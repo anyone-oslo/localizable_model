@@ -31,7 +31,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       matrix:
-        ruby: ['2.7', '3.0', '3.1']
+        ruby: ['3.0', '3.1']
     services:
       postgres:
         image: postgres:latest
@@ -74,6 +74,7 @@ jobs:
           bundle exec rake db:migrate
       - name: Run tests
         env:
+          DB: postgres
           PGHOST: localhost
           PGUSER: ${{ env.POSTGRES_USER }}
           PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
