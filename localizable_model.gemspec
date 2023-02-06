@@ -21,12 +21,6 @@ Gem::Specification.new do |s|
     "README.md"
   ]
 
-  s.add_development_dependency "factory_bot"
-  s.add_development_dependency "mysql2"
-  s.add_development_dependency "pg"
-  s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "shoulda-matchers"
-
   s.add_dependency "rails", "> 5.0"
   s.metadata["rubygems_mfa_required"] = "true"
 end
