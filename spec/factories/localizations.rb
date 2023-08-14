@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :localization do
     name { "name" }
     locale { "nb" }
-    association :localizable, factory: :blank_page
+    localizable factory: %i[blank_page]
   end
 end
