@@ -29,7 +29,7 @@ module LocalizableModel
     end
 
     def get(attribute, options = {})
-      get_options = { locale: locale }.merge(options)
+      get_options = { locale: }.merge(options)
       find_localizations(
         attribute.to_s,
         get_options[:locale].to_s
@@ -41,7 +41,7 @@ module LocalizableModel
     end
 
     def set(attribute, value, options = {})
-      set_options = { locale: locale }.merge(options)
+      set_options = { locale: }.merge(options)
       if value.is_a?(Hash) || value.is_a?(ActionController::Parameters)
         value.each { |loc, val| set(attribute, val, locale: loc) }
       else

@@ -19,9 +19,9 @@ module LocalizableModel
     #    end
     #  end
     #
-    def localizable(&block)
+    def localizable(&)
       extend_with_localizable_model!
-      localizable_configuration.instance_eval(&block) if block_given?
+      localizable_configuration.instance_eval(&) if block_given?
       define_localizable_methods!
     end
 

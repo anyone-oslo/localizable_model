@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = "LocalizableModel provides localization support for " \
                   "ActiveRecord objects"
 
-  s.required_ruby_version = ">= 2.7.0"
+  s.required_ruby_version = ">= 3.1.0"
 
   s.files = Dir[
     "{app,config,db,lib,vendor}/**/*",

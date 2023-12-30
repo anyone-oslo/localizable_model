@@ -1,5 +1,4 @@
 env:
-  RUBY_VERSION: 3.0
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   POSTGRES_DB: localizable_model_test
@@ -22,6 +21,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          ruby-version: 3.3
       - name: Check code
         run: bundle exec rubocop
 
@@ -31,7 +31,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       matrix:
-        ruby: ['3.0', '3.1', '3.2']
+        ruby: ['3.1', '3.2', '3.3']
     services:
       postgres:
         image: postgres:latest
@@ -54,16 +54,6 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Node modules cache
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Install Node modules
-        run: |
-          yarn install
       - name: Create database
         env:
           RAILS_ENV: test
@@ -80,7 +70,7 @@ jobs:
           PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
         run: bundle exec rspec
       - name: Send results to Code Climate
-        uses: paambaati/codeclimate-action@v2.6.0
+        uses: paambaati/codeclimate-action@v5.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
@@ -96,7 +86,7 @@ jobs:
     steps:
     - name: Prepare message
       id: message
-      uses: anyone-oslo/github-action-notify-slack@master
+      uses: anyone-oslo/github-action-notify-slack@main
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         run-id: ${{ github.run_id }}

@@ -20,6 +20,6 @@ class Localization < ActiveRecord::Base
   delegate :empty?, to: :to_s
 
   def translate(locale)
-    localizable.localizations.find_by(name: name, locale: locale)
+    localizable.localizations.find_by(name:, locale:)
   end
 end
