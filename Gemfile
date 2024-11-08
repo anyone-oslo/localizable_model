@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "rails", "~> 7.1.3"
+gem "rails", "~> 8.0.0"
 
 gemspec
 
