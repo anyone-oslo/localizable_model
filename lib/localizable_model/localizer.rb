@@ -9,9 +9,7 @@ module LocalizableModel
       @configuration = model.class.localizable_configuration
     end
 
-    def attribute?(attribute)
-      @configuration.attribute?(attribute)
-    end
+    delegate :attribute?, to: :@configuration
 
     def locales
       @model.localizations.map(&:locale).uniq

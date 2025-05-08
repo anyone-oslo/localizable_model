@@ -91,7 +91,7 @@ module LocalizableModel
     #
     def respond_to?(method_name, *args)
       requested_attribute, = method_name.to_s.match(/(.*?)([?=]?)$/)[1..2]
-      localizer.attribute?(requested_attribute.to_sym) ? true : super
+      localizer.attribute?(requested_attribute.to_sym) || super
     end
 
     alias translate localize
