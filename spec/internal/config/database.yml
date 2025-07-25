@@ -1,18 +1,10 @@
-mysql: &mysql
-  adapter:  mysql2
-  encoding: utf8
-  username: root
-  password:
-
-postgres: &postgres
-  adapter: postgresql
-
+---
 defaults: &defaults
   pool: 5
   timeout: 5000
   host: localhost
   database: localizable_model_test
-  <<: *<%= ENV["DB"] || "postgres" %>
+  adapter: postgresql
 
 test:
   <<: *defaults

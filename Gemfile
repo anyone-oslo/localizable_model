@@ -12,7 +12,6 @@ group :development, :test do
   gem "pry-stack_explorer"
 
   gem "factory_bot"
-  gem "mysql2"
   gem "pg"
   gem "rspec-rails"
   gem "rubocop", require: false
