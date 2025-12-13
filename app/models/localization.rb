@@ -5,11 +5,11 @@ class Localization < ActiveRecord::Base
 
   class << self
     def locales
-      order("locale ASC").pluck(Arel.sql("DISTINCT locale"))
+      order(:locale).pluck(Arel.sql("DISTINCT locale"))
     end
 
     def names
-      order("name ASC").pluck(Arel.sql("DISTINCT name"))
+      order(:name).pluck(Arel.sql("DISTINCT name"))
     end
   end
 
