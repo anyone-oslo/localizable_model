@@ -26,6 +26,21 @@ describe "Localizable" do
     it { is_expected.to match(%w[en nb]) }
   end
 
+  describe ".order_by_localization" do
+    subject { ordered.map(&:name) }
+
+    let(:ordered) { Page.in_locale(:en).order_by_localization(:name) }
+
+    before do
+      create(:page, name: { en: "Bravo" })
+      create(:page, name: { en: "Alpha", nb: "Bar" })
+      create(:page, name: { nb: "Foo" })
+      create(:page, name: { en: "Charlie" })
+    end
+
+    it { is_expected.to eq(["Alpha", "Bravo", "Charlie", ""]) }
+  end
+
   describe "#any_locale" do
     subject { page.any_locale.body }
 
