@@ -90,8 +90,7 @@ module LocalizableModel
     # A localized model responds to :foo, :foo= and :foo?
     #
     def respond_to?(method_name, *args)
-      requested_attribute, = method_name.to_s.match(/(.*?)([?=]?)$/)[1..2]
-      localizer.attribute?(requested_attribute.to_sym) || super
+      localizer.attribute?(method_to_attr(method_name)) || super
     end
 
     alias translate localize
@@ -133,7 +132,7 @@ module LocalizableModel
     end
 
     def method_to_attr(method_name)
-      method_name.to_s.match(/(.*?)([?=]?)$/)[1].to_sym
+      method_name.to_s.delete_suffix("?").delete_suffix("=").to_sym
     end
   end
 end
