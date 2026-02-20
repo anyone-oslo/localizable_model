@@ -6,22 +6,29 @@ module LocalizableModel
 
     def initialize(record)
       @record = record
-      define_localization_methods
+      @attributes = record.class.localized_attributes.to_set
+    end
+
+    def respond_to_missing?(method_name, include_private = false)
+      attr = method_name.to_s.delete_suffix("?")
+      @attributes.include?(attr.to_sym) || super
+    end
+
+    def method_missing(method_name, *args)
+      name = method_name.to_s
+      if name.end_with?("?")
+        attr = name.delete_suffix("?").to_sym
+        return super unless @attributes.include?(attr)
+
+        localized?(attr)
+      else
+        return super unless @attributes.include?(method_name)
+
+        localized(method_name)
+      end
     end
 
     private
-
-    def define_localization_methods
-      record.class.localized_attributes.each do |attribute|
-        self.class.send(:define_method, attribute) do
-          localized(attribute)
-        end
-
-        self.class.send(:define_method, "#{attribute}?") do
-          localized?(attribute)
-        end
-      end
-    end
 
     def locales
       (

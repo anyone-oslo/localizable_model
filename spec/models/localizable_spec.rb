@@ -81,6 +81,54 @@ describe "Localizable" do
         expect(page.any_locale.body?).to be(false)
       end
     end
+
+    describe "respond_to?" do
+      let(:page) { Page.create(locale: "en") }
+
+      it "responds to localized attributes" do
+        expect(page.any_locale).to respond_to(:body)
+      end
+
+      it "responds to localized predicate methods" do
+        expect(page.any_locale).to respond_to(:body?)
+      end
+
+      it "does not respond to unknown methods" do
+        expect(page.any_locale).not_to respond_to(:nonexistent)
+      end
+
+      it "does not respond to unknown predicate methods" do
+        expect(page.any_locale).not_to respond_to(:nonexistent?)
+      end
+    end
+
+    describe "unknown methods" do
+      let(:page) { Page.create(locale: "en") }
+
+      it "raises NoMethodError for unknown methods" do
+        expect { page.any_locale.nonexistent }.to raise_error(NoMethodError)
+      end
+
+      it "raises NoMethodError for unknown predicate methods" do
+        expect { page.any_locale.nonexistent? }.to raise_error(NoMethodError)
+      end
+    end
+
+    describe "multiple attributes" do
+      let(:page) do
+        Page.create(name: { "en" => "Title", "nb" => "Tittel" },
+                    body: { "en" => "Content" },
+                    locale: "en")
+      end
+
+      it "returns name in current locale" do
+        expect(page.any_locale.name).to eq("Title")
+      end
+
+      it "returns body in current locale" do
+        expect(page.any_locale.body).to eq("Content")
+      end
+    end
   end
 
   describe "#localized_attributes" do
