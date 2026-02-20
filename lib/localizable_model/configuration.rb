@@ -7,14 +7,16 @@ module LocalizableModel
     end
 
     def attribute(attribute_name, options = {})
+      @attributes = nil
       attribute_table[attribute_name.to_sym] = options
     end
 
     def attributes
-      attribute_table.merge(dictionary_attributes)
+      @attributes ||= attribute_table.merge(dictionary_attributes)
     end
 
     def dictionary(dict)
+      @attributes = nil
       dictionaries << dict
     end
 
