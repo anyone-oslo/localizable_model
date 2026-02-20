@@ -34,13 +34,11 @@ module LocalizableModel
     end
 
     def localized(attribute)
-      localized = locales.inject(nil) do |str, l|
-        str || lambda {
-          value = record.localize(l).send(attribute)
-          value.presence
-        }.call
+      locales.each do |l|
+        value = record.localize(l).send(attribute)
+        return value if value.present?
       end
-      localized || ""
+      ""
     end
   end
 end
