@@ -22,7 +22,7 @@ jobs:
     timeout-minutes: 10
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
@@ -52,7 +52,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: Install system dependencies
         run: sudo apt-get install -y libpq-dev libvips42
       - uses: ruby/setup-ruby@v1
@@ -124,7 +124,7 @@ jobs:
     if: ${{ needs.release-please.outputs.release_created }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "4.0"
