@@ -33,8 +33,8 @@ module LocalizableModel
       has_many(:localizations,
                as: :localizable,
                dependent: :destroy,
-               autosave: true)
-      before_save :cleanup_localizations!
+               autosave: false)
+      after_save :save_localizations!
     end
   end
 end

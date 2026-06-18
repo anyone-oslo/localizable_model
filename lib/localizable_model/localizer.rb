@@ -53,11 +53,53 @@ module LocalizableModel
       get(attribute).value?
     end
 
-    def cleanup_localizations!
-      @model.localizations = @model.localizations.select(&:value?)
+    def save_localizations!
+      records    = @model.localizations.target
+      removable  = records.select { |l| l.persisted? && !l.value? }
+      upsertable = records.select { |l| upsertable?(l) }
+      return if removable.empty? && upsertable.empty?
+
+      delete_localizations(removable)
+      upsert_localizations(upsertable)
+      @model.association(:localizations).reset
+      touch_localizable
     end
 
     private
+
+    def upsertable?(localization)
+      localization.value? &&
+        (localization.new_record? || localization.value_changed?)
+    end
+
+    def delete_localizations(records)
+      ids = records.map(&:id)
+      Localization.where(id: ids).delete_all if ids.any?
+    end
+
+    def upsert_localizations(records)
+      return if records.empty?
+
+      Localization.upsert_all( # rubocop:disable Rails/SkipsModelValidations
+        records.map { |l| localization_row(l) },
+        unique_by: %i[localizable_id localizable_type name locale]
+      )
+    end
+
+    def localization_row(localization)
+      { localizable_id: @model.id,
+        localizable_type: @model.class.polymorphic_name,
+        name: localization.name,
+        locale: localization.locale,
+        value: localization.value }
+    end
+
+    def touch_localizable
+      return if @model.previously_new_record?
+      return if @model.saved_changes.except("created_at", "updated_at").any?
+
+      @model.touch # rubocop:disable Rails/SkipsModelValidations
+    end
 
     def attribute_names
       @configuration.attributes.keys.map(&:to_s)

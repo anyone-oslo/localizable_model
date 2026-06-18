@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2016_05_06_141709) do
     t.text "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["localizable_id", "localizable_type", "name", "locale"], name: "index_localizations_on_locale"
+    t.index ["localizable_id", "localizable_type", "name", "locale"], name: "index_localizations_on_locale", unique: true
     t.index ["localizable_id", "localizable_type"], name: "index_localizations_on_localizable_id_and_localizable_type"
   end
 

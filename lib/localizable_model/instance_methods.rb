@@ -106,11 +106,10 @@ module LocalizableModel
       @localizer ||= Localizer.new(self)
     end
 
-    # Callback for cleaning up empty localizations.
-    # This is performed automatically when the model is saved.
+    # Persists localizations after the model is saved.
     #
-    def cleanup_localizations!
-      localizer.cleanup_localizations!
+    def save_localizations!
+      localizer.save_localizations!
     end
 
     def respond_to_missing?(method_name, include_private = false)
