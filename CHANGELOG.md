@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.7](https://github.com/anyone-oslo/localizable_model/compare/localizable_model/v0.6.6...localizable_model/v0.6.7) (2026-06-18)
+
+
+### Bug Fixes
+
+* upsert localizations to avoid duplicate-key races ([00ba088](https://github.com/anyone-oslo/localizable_model/commit/00ba08827da1a77fa4c1535ecb22a4b99edb22fa))
+* upsert localizations to avoid duplicate-key races ([fb9a287](https://github.com/anyone-oslo/localizable_model/commit/fb9a2879dc9ba9e895f1692a2e27429dbbb570be))
+
 ## [0.6.6](https://github.com/anyone-oslo/localizable_model/compare/localizable_model-v0.6.5...localizable_model/v0.6.6) (2026-02-20)
 
 
