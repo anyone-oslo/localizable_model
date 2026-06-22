@@ -28,8 +28,9 @@ module LocalizableModel
     def extend_with_localizable_model!
       return if is_a?(LocalizableModel::ClassMethods)
 
-      send :extend,  LocalizableModel::ClassMethods
-      send :include, LocalizableModel::InstanceMethods
+      extend LocalizableModel::ClassMethods
+      include LocalizableModel::InstanceMethods
+
       has_many(:localizations,
                as: :localizable,
                dependent: :destroy,
