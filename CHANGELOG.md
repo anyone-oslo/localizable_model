@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.8](https://github.com/anyone-oslo/localizable_model/compare/localizable_model/v0.6.7...localizable_model/v0.6.8) (2026-06-23)
+
+
+### Bug Fixes
+
+* do not report blank locale for phantom localizations ([4bb0e9d](https://github.com/anyone-oslo/localizable_model/commit/4bb0e9de2bdf48474a22347482674ee8fcfd0bfe))
+* do not report blank locale for phantom localizations ([5dcd0f7](https://github.com/anyone-oslo/localizable_model/commit/5dcd0f753727f505b83badaa11143d790b093e61))
+
 ## [0.6.7](https://github.com/anyone-oslo/localizable_model/compare/localizable_model/v0.6.6...localizable_model/v0.6.7) (2026-06-18)
 
 
