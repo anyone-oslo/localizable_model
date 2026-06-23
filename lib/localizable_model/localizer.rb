@@ -12,7 +12,7 @@ module LocalizableModel
     delegate :attribute?, to: :@configuration
 
     def locales
-      @model.localizations.map(&:locale).uniq
+      @model.localizations.map(&:locale).compact_blank.uniq
     end
 
     def locale?
@@ -57,12 +57,14 @@ module LocalizableModel
       records    = @model.localizations.target
       removable  = records.select { |l| l.persisted? && !l.value? }
       upsertable = records.select { |l| upsertable?(l) }
-      return if removable.empty? && upsertable.empty?
 
-      delete_localizations(removable)
-      upsert_localizations(upsertable)
+      unless removable.empty? && upsertable.empty?
+        delete_localizations(removable)
+        upsert_localizations(upsertable)
+        touch_localizable
+      end
+
       @model.association(:localizations).reset
-      touch_localizable
     end
 
     private

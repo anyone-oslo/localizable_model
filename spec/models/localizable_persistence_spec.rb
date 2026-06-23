@@ -71,4 +71,21 @@ describe "LocalizablePersistence" do
       expect(Localization.where(localizable: page, name: "name")).to be_empty
     end
   end
+
+  describe "reading a localized attribute without assigning a locale" do
+    let(:page) { Page.new }
+
+    before do
+      page.name?
+      page.save!
+    end
+
+    it "does not report a blank locale" do
+      expect(page.locales).to eq([])
+    end
+
+    it "does not persist a phantom localization" do
+      expect(Localization.where(localizable: page)).to be_empty
+    end
+  end
 end
