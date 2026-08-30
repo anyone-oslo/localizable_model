@@ -87,7 +87,14 @@ page.any_locale.name? # => true
 page.any_locale.name  # => "Bonjour"
 ```
 
+## Contributing
+
+Bug reports and pull requests are welcome on
+[GitHub](https://github.com/anyone-oslo/localizable_model). See
+[CONTRIBUTING.md](CONTRIBUTING.md) for how to run the tests and how
+commits are formatted, and note that this project ships with a
+[code of conduct](CODE_OF_CONDUCT.md).
+
 ## License
 
-LocalizableModel is licensed under the
-[MIT License](http://www.opensource.org/licenses/MIT).
+Released under the [MIT License](MIT-LICENSE).

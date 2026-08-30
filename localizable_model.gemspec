@@ -8,7 +8,8 @@ Gem::Specification.new do |s|
   s.version     = LocalizableModel::VERSION
   s.authors     = ["Inge Jørgensen"]
   s.email       = ["inge@anyone.no"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/anyone-oslo/localizable_model"
+  s.license     = "MIT"
   s.summary     = "Localization support for ActiveRecord objects"
   s.description = "LocalizableModel provides localization support for " \
                   "ActiveRecord objects"
@@ -22,5 +23,11 @@ Gem::Specification.new do |s|
   ]
 
   s.add_dependency "rails", "> 5.0"
-  s.metadata["rubygems_mfa_required"] = "true"
+  s.metadata = {
+    "bug_tracker_uri" => "https://github.com/anyone-oslo/localizable_model/issues",
+    "changelog_uri" => "https://github.com/anyone-oslo/localizable_model/blob/main/CHANGELOG.md",
+    "documentation_uri" => "https://www.rubydoc.info/gems/localizable_model",
+    "rubygems_mfa_required" => "true",
+    "source_code_uri" => "https://github.com/anyone-oslo/localizable_model"
+  }
 end
